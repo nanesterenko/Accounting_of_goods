@@ -1,8 +1,7 @@
-import unittest
-from main import insert_shops
-from test.test_cases import TEST_CASES
-import sys
 import os
+import sys
+import unittest
+from case import TEST_CASES
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -18,4 +17,4 @@ class GoodsTestCase(unittest.TestCase):
         for test_case in test_cases:
             test_input = test_case.get("test_input")
             expected = test_case.get("expected")
-            self.assertEqual(insert_shops(test_input), expected)
+            self.assertEqual(main(test_input), expected)

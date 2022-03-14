@@ -1,0 +1,11 @@
+{
+    "id" : 2,
+    "name" : "NVIDIA ",
+    "package_params" : {
+            "type" : "cardboard_box",
+            "width" : -30,
+            "height" : 10,
+            "depth" : -10
+        },
+    "location_and_quantity" : []
+}

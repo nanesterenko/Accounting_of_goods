@@ -10,10 +10,10 @@ from jsonschema.exceptions import ValidationError
 def read_from_file(path_to_file: str) -> dict:
     """"Считываем схему и входящие данные из json файлов."""
     try:
-        with open(path_to_file, "r", encoding="UTF-8") as json_schema:
-            schema = json.load(json_schema)
-        with open("input_example.json", "r", encoding="UTF-8") as file_json:
+        with open(path_to_file, "r", encoding="UTF-8") as file_json:
             input_data = json.load(file_json)
+        with open("goods.schema_.json", "r", encoding="UTF-8") as json_schema:
+            schema = json.load(json_schema)
         """Происходит валидация входных данных."""
         validate(input_data, schema)
     except ValidationError:
@@ -48,7 +48,7 @@ def create_tab(connect: Any) -> None:
     connect.commit()
 
 
-def insert_shops(connect: Any, input_data: dict) -> None:
+def insert_shops(connect: Any, input_data: dict) -> str:
     """Подготовка данных к вставке в БД."""
     pack_type = input_data["package_params"]["type"]
     pack_width = input_data["package_params"]["width"]
@@ -75,7 +75,7 @@ def insert_shops(connect: Any, input_data: dict) -> None:
         shops_goods = (f"INSERT INTO shops_goods (id_good, id_shop, amount)\n"
                        f"VALUES ({id_good}, ({id_shop}), {goods_amount});")
         request_execute(connect, shops_goods)
-    print("Данные обновлены")
+    return "Данные обновлены"
 
 
 def request_execute(connect: Any, request: str) -> None:
@@ -85,7 +85,7 @@ def request_execute(connect: Any, request: str) -> None:
         c.execute(request)
         connect.commit()
     except sqlite3.Error:
-        print(f"Ошибка при добавлении данных в БД: \n {request}")
+        print(f"Ошибка при добавлении данных в БД \n {request}")
 
 
 def main(path_to_file: str) -> None:
@@ -98,4 +98,5 @@ def main(path_to_file: str) -> None:
 
 
 if __name__ == "__main__":
-    main("goods.schema_.json")
+    #main("input_example.json")
+    main("testss\input2.json")
